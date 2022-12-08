@@ -1,6 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+const queryClient = new QueryClient()
 
 import Appcontext from "./store/contexts/AppContext";
 import Authcontext from "./store/contexts/AuthContext";
@@ -15,7 +20,9 @@ root.render(
       <BrowserRouter>
         <Appcontext>
           <Authcontext>
-            <App />
+            <QueryClientProvider client={queryClient}>
+              <App />
+            </QueryClientProvider>
           </Authcontext>
         </Appcontext>
       </BrowserRouter>

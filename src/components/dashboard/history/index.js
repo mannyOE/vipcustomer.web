@@ -7,7 +7,7 @@ import Paginate from "components/dashboard/search/components/results/components/
 // import { _vip } from "./data"; //tetst data
 import { BsCheckLg } from "react-icons/bs";
 import { FaTimes } from "react-icons/fa";
-import axios from "axios";
+import Axios from "api/axios";
 import {
   ResultsWrapper,
   Tablet,
@@ -50,11 +50,13 @@ const Result = ({ vip = [] }) => {
  // for history and clearHistory
   // const [history, setHistory] = useState([]);
   // const [ clearHistory, SetClearHistory] = useState();
- 
 
-  // useEffect(() => {
-  //   loadHistory();
-  // })
+  const getHistory = async function(){
+    return await Axios.get("/api/history")
+  }
+ 
+  const {isLoading, isError, data, error} = useQuery({ queryKey: ['history'], queryFn: getHistory })
+  
   // app
   return (
     <>
